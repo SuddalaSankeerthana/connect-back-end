@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 
+	"github.com/Tej-11/connect-backend-application/database/models"
 	"github.com/Tej-11/connect-backend-application/env"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -19,6 +20,7 @@ func EstablishDatabaseConnection() (*gorm.DB, error) {
 		return nil, err
 	} else {
 		fmt.Println("connection established")
+		db.AutoMigrate(&models.User{}, &models.Post{}, &models.Image{}, &models.Comment{}, &models.Like{})
 	}
 
 	DB = db
