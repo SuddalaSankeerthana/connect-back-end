@@ -1,9 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"github.com/Tej-11/connect-backend-application/database/config"
+	"github.com/Tej-11/connect-backend-application/database/queries"
 )
 
 func main() {
-	fmt.Println("Hello world")
+	config.EstablishDatabaseConnection()
+	queries.CreateSeeds()
 }
