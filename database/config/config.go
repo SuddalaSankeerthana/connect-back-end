@@ -17,7 +17,7 @@ func EstablishDatabaseConnection() (*gorm.DB, error) {
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		return nil, err
+		panic("Failed to connect to database!")
 	} else {
 		fmt.Println("connection established")
 		db.AutoMigrate(&models.User{}, &models.Post{}, &models.Image{}, &models.Comment{}, &models.Like{})
