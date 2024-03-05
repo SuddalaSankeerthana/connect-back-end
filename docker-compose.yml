@@ -1,0 +1,46 @@
+version: '3'
+services:
+
+  mysqlDB:
+    env_file:
+      - .env
+    image: mysql:latest
+    container_name: mysql
+    ports: 
+      - 3306:3306
+    environment: 
+      - MYSQL_ROOT_HOST=${DB_HOST} 
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - database_mysql:/var/lib/mysql
+    networks:
+      - connect
+    
+  app:
+    env_file:
+      - .env
+    container_name: full_app
+    environment:
+      - DSN =${DSN}
+    build: .
+    ports: 
+      - 8080:8080 
+    restart: on-failure
+    volumes:
+      - api:/usr/src/app/
+    depends_on:
+      - mysqlDB
+    networks:
+      - connect
+
+  
+volumes:
+  api:
+  database_mysql:                 
+
+networks:
+  connect:
+    driver: bridge
