@@ -2,7 +2,7 @@
 
 ## Note
 Create an .env file with the following data
-- DSN = "user_name:password@tcp(localhost:3306)/ConnectDevDB?charset=utf8mb4&parseTime=True&loc=Local"
+- DSN = "user_name:password@tcp(host_name:port_number)/ConnectDevDB?charset=utf8mb4&parseTime=True&loc=Local"
 
 ## Installing packages
 - To install all the dependencies/packages required use the command `go get ./...`
