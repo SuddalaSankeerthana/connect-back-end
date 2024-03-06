@@ -28,7 +28,7 @@ func UpdateLikes(context *gin.Context) {
 					queries.UpdatePostLikes(postId, likesCount+1)
 					likesCount = queries.GetLikes(postId)
 					context.JSON(http.StatusOK, gin.H{
-						"PostId": postId,
+						"PostId":    postId,
 						"LikeCount": likesCount,
 					})
 
@@ -36,7 +36,7 @@ func UpdateLikes(context *gin.Context) {
 					queries.UpdatePostLikes(postId, likesCount-1)
 					likesCount = queries.GetLikes(postId)
 					context.JSON(http.StatusOK, gin.H{
-						"PostId": postId,
+						"PostId":    postId,
 						"LikeCount": likesCount,
 					})
 
