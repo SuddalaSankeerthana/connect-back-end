@@ -8,4 +8,5 @@ import (
 func Routes(route *gin.Engine) {
 	home := route.Group("/homepage")
 	home.GET("/get-posts", controllers.GetPosts)
+	home.GET("/get-users", controllers.GetUsers)
 }
