@@ -10,5 +10,5 @@ func Routes(route *gin.Engine) {
 
 	auth := route.Group("/auth")
 	auth.POST("/register", controllers.AddUsers)
-
+    auth.POST("/login", controllers.LoginUser)
 }
