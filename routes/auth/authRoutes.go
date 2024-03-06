@@ -1,37 +1,45 @@
 package auth
 
 import (
+	"fmt"
 	"net/http"
-
+	// "time"
 	"github.com/gin-gonic/gin"
+	// "github.com/golang-jwt/jwt"
+	"github.com/google/uuid"
+	"golang.org/x/crypto/bcrypt"
+	"github.com/Tej-11/connect-backend-application/database/config"
+	"github.com/Tej-11/connect-backend-application/database/models"
 )
 
+
 func Routes(route *gin.Engine) {
+
 	auth := route.Group("/auth")
-    auth.POST("/login", func(c *gin.Context) {
+	auth.POST("/register", func(c *gin.Context) {
+        var user models.User
 
-		var requestBody struct {
-			Message string `json:"message"`
-		}
-
-		if err := c.BindJSON(&requestBody); err != nil {
+		if err := c.ShouldBindJSON(&user); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"message": "You are in the login route"})
-	})
-	auth.POST("/sign-up", func(c *gin.Context) {
-
-		var requestBody struct {
-			Message string `json:"message"`
-		}
-
-		if err := c.BindJSON(&requestBody); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to hash password"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"message": "You are in the sign-up route"})
+		user.UserId = uuid.New().String()
+		user.Password = string(hashedPassword)
+		fmt.Println(string(hashedPassword))
+
+		if err := config.DB.Create(&user).Error; err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+			return
+		}
+		c.JSON(http.StatusCreated, gin.H{"message": "User registered successfully"})
+
 	})
+
 }
