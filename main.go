@@ -10,9 +10,23 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// func GetLikeStatus(userId string) {
+// 	var queryData []models.Like
+// 	config.DB.Table("likes").Select(
+// 		`likes.post_id,likes.user_id`).Where(`likes.user_id`, userId).Scan(&queryData)
+// 	fmt.Println(queryData)
+// 	return
+// }
+
+type LikeStatus struct {
+	likeStatus string
+	postId     string
+}
+
 func main() {
 	config.EstablishDatabaseConnection()
-	queries.CreateSeeds()
+	queries.GetLikeStatus("2")
+	// queries.CreateSeeds()
 	router := gin.Default()
 	router.Use(cors.Default())
 	home.Routes(router)

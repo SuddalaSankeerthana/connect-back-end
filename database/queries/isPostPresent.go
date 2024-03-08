@@ -1,8 +1,6 @@
 package queries
 
 import (
-	"fmt"
-
 	"github.com/Tej-11/connect-backend-application/database/config"
 	"github.com/Tej-11/connect-backend-application/database/models"
 	"gorm.io/gorm"
@@ -17,7 +15,6 @@ func IsPostPresent(postId string) bool {
 			return false
 		} else {
 			return false
-			fmt.Println("Error:", err)
 		}
 	}
 	return true

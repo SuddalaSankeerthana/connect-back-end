@@ -1,11 +1,14 @@
 package queries
 
 import (
+	"fmt"
+
 	"github.com/Tej-11/connect-backend-application/customTypes"
 	"github.com/Tej-11/connect-backend-application/database/config"
+	"github.com/Tej-11/connect-backend-application/database/models"
 )
 
-func GetPosts() []customTypes.ImagePostUser {
+func GetPosts(userID string) []customTypes.ImagePostUser {
 
 	var queryData []customTypes.ImagePostUser
 
@@ -21,6 +24,15 @@ func GetPosts() []customTypes.ImagePostUser {
 		Joins("right join posts on posts.post_id = images.post_id").
 		Joins("right join users on users.user_id = posts.user_id").
 		Scan(&queryData)
-
+	userId := 
+	const likedData = GetLikeStatus(userId)
 	return queryData
+}
+
+func GetLikeStatus(userId string) {
+	var queryData []models.Like
+	config.DB.Table("likes").Select(
+		`likes.post_id,likes.user_id`).Where(`likes.user_id`, userId).Scan(&queryData)
+	fmt.Println(queryData)
+	return
 }
