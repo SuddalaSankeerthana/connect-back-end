@@ -8,4 +8,5 @@ type ImagePostUser struct {
 	ImageURL            string
 	Caption             string
 	LikesCount          int
+	LikeStatus          bool
 }

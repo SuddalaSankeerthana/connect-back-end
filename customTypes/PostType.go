@@ -8,5 +8,5 @@ type PostType struct {
 	Images              []string
 	Caption             string
 	LikesCount          int
-	isPostLIked         bool
+	LikeStatus          bool
 }
