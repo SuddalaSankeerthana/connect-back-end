@@ -3,13 +3,12 @@ package queries
 import (
 	"github.com/Tej-11/connect-backend-application/customTypes"
 	"github.com/Tej-11/connect-backend-application/database/config"
-	"github.com/Tej-11/connect-backend-application/database/models"
 	"github.com/gin-gonic/gin"
 )
 
 func GetPosts(context *gin.Context) []customTypes.ImagePostUser {
 	queryParams := context.Request.URL.Query()
-	var likeStatusData = GetLikeStatus(queryParams["userId"][0])
+	var likeStatusData = GetLikesTableData(queryParams["userId"][0])
 	var queryData []customTypes.ImagePostUser
 	config.DB.Table("images").
 		Select(`
@@ -31,12 +30,5 @@ func GetPosts(context *gin.Context) []customTypes.ImagePostUser {
 			}
 		}
 	}
-	return queryData
-}
-
-func GetLikeStatus(userId string) []models.Like {
-	var queryData []models.Like
-	config.DB.Table("likes").Select(
-		`likes.post_id,likes.user_id`).Where(`likes.user_id`, userId).Scan(&queryData)
 	return queryData
 }
