@@ -1,8 +1,6 @@
 package queries
 
 import (
-	"fmt"
-
 	"github.com/Tej-11/connect-backend-application/customTypes"
 	"github.com/Tej-11/connect-backend-application/database/config"
 	"github.com/Tej-11/connect-backend-application/database/models"
@@ -11,9 +9,6 @@ import (
 
 func GetPosts(context *gin.Context) []customTypes.ImagePostUser {
 	queryParams := context.Request.URL.Query()
-	for key, values := range queryParams {
-		fmt.Printf("Parameter: %s, Values: %v\n", key, values)
-	}
 	var likeStatusData = GetLikeStatus(queryParams["userId"][0])
 	var queryData []customTypes.ImagePostUser
 	config.DB.Table("images").
