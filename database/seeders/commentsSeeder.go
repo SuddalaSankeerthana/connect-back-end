@@ -21,14 +21,14 @@ func InsertSeedsInComments() {
 			CommentMessage: "Its parent comment 2",
 			CreatedAt:      time.Now(),
 			UserId:         "3",
-			PostId:         "2",
+			PostId:         "1",
 		},
 		{
 			CommentId:      "3",
 			CommentMessage: "Its parent comment 3",
 			CreatedAt:      time.Now(),
 			UserId:         "4",
-			PostId:         "3",
+			PostId:         "2",
 		},
 		{
 			CommentId:      "4",
