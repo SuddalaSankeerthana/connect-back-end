@@ -2,12 +2,10 @@ package controllers
 
 import (
 	"net/http"
-	"time"
 
 	"github.com/Tej-11/connect-backend-application/database/config"
 	"github.com/Tej-11/connect-backend-application/database/models"
 	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -45,16 +43,15 @@ func LoginUser(c *gin.Context) {
 
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", tokenString, 3600 * 24 * 30, "", "", false, true)
-	c.JSON(http.StatusOK, gin.H{})
-
-	// c.JSON(http.StatusOK, gin.H{"token": token, "user": user})
+	// c.JSON(http.StatusOK, gin.H{})
+	c.JSON(http.StatusOK, gin.H{"user": user})
 }
 
-func generateToken(userID string) (string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"userId": userID,
-		"exp":    time.Now().Add(time.Hour * 1).Unix(),
-	})
+// func generateToken(userID string) (string, error) {
+// 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+// 		"userId": userID,
+// 		"exp":    time.Now().Add(time.Hour * 1).Unix(),
+// 	})
 	
-	return token.SignedString(jwtKey)
-}
+// 	return token.SignedString(jwtKey)
+// }
