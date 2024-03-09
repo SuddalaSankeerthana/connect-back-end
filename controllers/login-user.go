@@ -41,17 +41,7 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 
-	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", tokenString, 3600 * 24 * 30, "", "", false, true)
-	// c.JSON(http.StatusOK, gin.H{})
-	c.JSON(http.StatusOK, gin.H{"user": user})
+	// c.SetSameSite(http.SameSiteLaxMode)
+	// c.SetCookie("Authorization", tokenString, 3600 * 24 * 30, "", "", false, true)
+	c.JSON(http.StatusOK, gin.H{"user": user, "token": tokenString})
 }
-
-// func generateToken(userID string) (string, error) {
-// 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-// 		"userId": userID,
-// 		"exp":    time.Now().Add(time.Hour * 1).Unix(),
-// 	})
-	
-// 	return token.SignedString(jwtKey)
-// }

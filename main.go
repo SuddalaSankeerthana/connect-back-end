@@ -14,7 +14,14 @@ func main() {
 	config.EstablishDatabaseConnection()
 	queries.CreateSeeds()
 	router := gin.Default()
-	router.Use(cors.Default())
+
+	configure := cors.DefaultConfig()
+	configure.AllowOrigins = []string{"http://localhost:3000"}
+	configure.AllowCredentials = true
+	// configure.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Cookie"}
+
+	router.Use(cors.New(configure))
+	// router.Use(cors.Default())
 	home.Routes(router)
 	auth.Routes(router)
 	router.Run()

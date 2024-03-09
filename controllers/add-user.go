@@ -41,8 +41,8 @@ func AddUsers(c *gin.Context) {
 		return
 	}
 
-	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", tokenString, 3600 * 24 * 30, "", "", false, true)
-	c.JSON(http.StatusCreated, gin.H{"message": "User registered successfully", "user": user})
+	// c.SetSameSite(http.SameSiteLaxMode)
+	// c.SetCookie("Authorization", tokenString, 3600 * 24 * 30, "", "", false, true)
+	c.JSON(http.StatusCreated, gin.H{"message": "User registered successfully", "user": user, "token": tokenString})
 
 }
