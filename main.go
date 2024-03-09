@@ -5,6 +5,7 @@ import (
 	"github.com/Tej-11/connect-backend-application/database/queries"
 	"github.com/Tej-11/connect-backend-application/routes/auth"
 	"github.com/Tej-11/connect-backend-application/routes/home"
+	"github.com/Tej-11/connect-backend-application/routes/upload"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -17,5 +18,6 @@ func main() {
 	router.Use(cors.Default())
 	home.Routes(router)
 	auth.Routes(router)
+	upload.Routes(router)
 	router.Run()
 }
