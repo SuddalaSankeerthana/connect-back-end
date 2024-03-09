@@ -27,7 +27,7 @@ func QueryToPostsParser(queryData []customTypes.ImagePostUser) map[string]custom
 			postDetails.Images = []string{data.ImageURL}
 			postDetails.Caption = data.Caption
 			postDetails.LikesCount = data.LikesCount
-
+			postDetails.LikeStatus = data.LikeStatus
 			posts[data.PostId] = postDetails
 		}
 	}

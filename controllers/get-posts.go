@@ -7,7 +7,7 @@ import (
 )
 
 func GetPosts(context *gin.Context) {
-	var postsRawData = queries.GetPosts()
+	var postsRawData = queries.GetPosts(context)
 	var posts = utils.QueryToPostsParser(postsRawData)
 	context.JSON(200, gin.H{
 		"posts": posts,

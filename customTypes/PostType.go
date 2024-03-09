@@ -8,4 +8,5 @@ type PostType struct {
 	Images              []string
 	Caption             string
 	LikesCount          int
+	LikeStatus          bool
 }
