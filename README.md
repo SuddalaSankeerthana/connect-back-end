@@ -19,6 +19,15 @@ Create an .env file with the following data
 >>> - For above two route takes body as `{
     "message": "Hello, world!"
 }`
+> - POST `http://localhost:8080/homepage/post-comment`
+>> - For the above post route takes body as  `{
+    {
+    "PostId": ,
+    "UserId": ,
+    "ParentCommentId": ,
+    "CommentMessage": 
+}
+}` 
 ### > - While working with the /auth group change the functionality accordingly.
 
 ##

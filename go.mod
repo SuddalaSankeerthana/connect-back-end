@@ -4,6 +4,8 @@ go 1.22.0
 
 require gorm.io/driver/mysql v1.5.4
 
+require github.com/google/uuid v1.6.0 // indirect
+
 require (
 	github.com/bytedance/sonic v1.11.2 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
