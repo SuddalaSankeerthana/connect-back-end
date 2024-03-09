@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/Tej-11/connect-backend-application/database/config"
+	"github.com/Tej-11/connect-backend-application/database/queries"
+	// "github.com/Tej-11/connect-backend-application/database/queries"
 	"github.com/Tej-11/connect-backend-application/routes/auth"
 	"github.com/Tej-11/connect-backend-application/routes/home"
 
@@ -9,14 +11,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type LikeStatus struct {
-	likeStatus string
-	postId     string
-}
-
 func main() {
 	config.EstablishDatabaseConnection()
-	// queries.CreateSeeds()
+	queries.CreateSeeds()
 	router := gin.Default()
 	router.Use(cors.Default())
 	home.Routes(router)

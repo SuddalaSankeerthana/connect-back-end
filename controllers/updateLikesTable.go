@@ -19,7 +19,7 @@ func UpdateLikeTable(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"message": "Updating likes table"})
+	// context.JSON(http.StatusOK, gin.H{"message": "Updating likes table"})
 	if status == "true" {
 		queries.InsertLikes(likeData.PostId, likeData.UserId)
 		context.JSON(http.StatusCreated, gin.H{"message": "Inserted data into likes table"})
