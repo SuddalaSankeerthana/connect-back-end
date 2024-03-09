@@ -40,7 +40,6 @@ func LoginUser(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
 		return
 	}
-
 	// c.SetSameSite(http.SameSiteLaxMode)
 	// c.SetCookie("Authorization", tokenString, 3600 * 24 * 30, "", "", false, true)
 	c.JSON(http.StatusOK, gin.H{"user": user, "token": tokenString})
