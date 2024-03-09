@@ -32,7 +32,7 @@ S3BUCKET_URL=your_s3_bucket_url
  Use the above routes in the login and registration screens, it ensures the password authentication.
 
 - Here we have our backend running in the address `http://localhost:8080/` in the following routes.
- - `/homepage/get-posts` -> This route fetches the posts data.
+ - `/homepage/get-posts?userId=<userId>` -> This route fetches the posts data.
  - `/homepage/get-comments/:postId` -> This route fetches the comments data taking post id as query parameter.
  - `/homepage/like/:postId/:likeStatus` -> This route updates the likes count of a post taking post id and like status as query parameter.
 - likeStatus value can be `liked` or `unliked` only
