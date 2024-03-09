@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/Tej-11/connect-backend-application/controllers"
+	"github.com/gin-gonic/gin"
 )
 
 
