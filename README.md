@@ -24,11 +24,26 @@ S3BUCKET_URL=your_s3_bucket_url
 ## Running the Application
 
 - To start the app use the command `go run main.go` or `go run .`
+
 - Here we have our backend running in the address `http://localhost:8080/homepage/get-posts`. This route fetches the posts data.
 - Created the authentication routes:
-> - POST `http://localhost:8080/auth/login` 
-> - POST `http://localhost:8080/auth/register`
->> Use the above routes in the login and registration screens, it ensures the password authentication.
+ - POST `http://localhost:8080/auth/login` 
+ - POST `http://localhost:8080/auth/register`
+ Use the above routes in the login and registration screens, it ensures the password authentication.
+
+- Here we have our backend running in the address `http://localhost:8080/` in the following routes.
+ - `/homepage/get-posts` -> This route fetches the posts data.
+ - `/homepage/get-comments/:postId` -> This route fetches the comments data taking post id as query parameter.
+ - `/homepage/like/:postId/:likeStatus` -> This route updates the likes count of a post taking post id and like status as query parameter.
+- likeStatus value can be `liked` or `unliked` only
+
+- I have also created the authentication routes:
+ - POST `http://localhost:8080/auth/login` 
+ - POST `http://localhost:8080/auth/sign-up`
+ - For above two route takes body as `{
+    "message": "Hello, world!"
+}`
+
 ### > - While working with the /auth group change the functionality accordingly.
 
 # upload:
