@@ -18,13 +18,13 @@ func UpdateLikes(context *gin.Context) {
 
 	if postId != "" && likeStatus != "" {
 
-		if likeStatus == "liked" || likeStatus == "unliked" {
+		if likeStatus == "true" || likeStatus == "false" {
 
 			if queries.IsPostPresent(postId) {
 
 				var likesCount = queries.GetLikes(postId)
 
-				if likeStatus == "liked" {
+				if likeStatus == "true" {
 					queries.UpdatePostLikes(postId, likesCount+1)
 					likesCount = queries.GetLikes(postId)
 					context.JSON(http.StatusOK, gin.H{
@@ -49,7 +49,7 @@ func UpdateLikes(context *gin.Context) {
 			}
 		} else {
 			context.JSON(http.StatusBadRequest, gin.H{
-				"Error": "Like status cannot be other than \"liked\" or \"unliked\" ",
+				"Error": "Like status cannot be other than \"true\" or \"false\" ",
 			})
 		}
 
