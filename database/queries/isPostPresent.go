@@ -14,9 +14,8 @@ func IsPostPresent(postId string) bool {
 		if err == gorm.ErrRecordNotFound {
 			return false
 		} else {
-			return false
+			return true
 		}
 	}
 	return true
-
 }
