@@ -6,6 +6,7 @@ import (
 	"github.com/Tej-11/connect-backend-application/controllers/aws_utils"
 	"github.com/Tej-11/connect-backend-application/customTypes"
 	"github.com/Tej-11/connect-backend-application/database/models"
+	"github.com/Tej-11/connect-backend-application/database/queries"
 	"github.com/Tej-11/connect-backend-application/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -45,6 +46,8 @@ func AddUsers(c *gin.Context) {
 	newUser.Email = user.Email
 	newUser.Password = user.Password
 	newUser.ProfileImageAddress = imagesURLs[user.UserId]
+
+	queries.CreateNewUser(newUser)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
