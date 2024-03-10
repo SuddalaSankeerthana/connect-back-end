@@ -1,18 +1,17 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
-	"github.com/Tej-11/connect-backend-application/database/config"
-	"github.com/Tej-11/connect-backend-application/database/models"
+	"github.com/Tej-11/connect-backend-application/customTypes"
+	"github.com/Tej-11/connect-backend-application/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
 func AddUsers(c *gin.Context) {
-	var user models.User
+	var user customTypes.RegisteredDetailsBodyType
 
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -27,22 +26,15 @@ func AddUsers(c *gin.Context) {
 
 	user.UserId = uuid.New().String()
 	user.Password = string(hashedPassword)
-	fmt.Println(string(hashedPassword))
 
-	if err := config.DB.Create(&user).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
-		return
-	}
-
-	tokenString, err := generateToken(user.UserId)
-
+	base64DecodedImages, err := utils.Base64Decoder(user.ProfileImageAddress)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to decode profile picture"})
 		return
 	}
 
 	// c.SetSameSite(http.SameSiteLaxMode)
-	// c.SetCookie("Authorization", tokenString, 3600 * 24 * 30, "", "", false, true)
+	// c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
 	c.JSON(http.StatusCreated, gin.H{"message": "User registered successfully", "user": user, "token": tokenString})
 
 }
