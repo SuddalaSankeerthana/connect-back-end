@@ -20,33 +20,33 @@ func UpdateLikes(context *gin.Context) {
 
 		if likeStatus == "true" || likeStatus == "false" {
 
-			if queries.IsPostPresent(postId) {
+			// if queries.IsPostPresent(postId) {
 
-				var likesCount = queries.GetLikes(postId)
+			var likesCount = queries.GetLikes(postId)
 
-				if likeStatus == "true" {
-					queries.UpdatePostLikes(postId, likesCount+1)
-					likesCount = queries.GetLikes(postId)
-					context.JSON(http.StatusOK, gin.H{
-						"PostId":    postId,
-						"LikeCount": likesCount,
-					})
-
-				} else {
-					queries.UpdatePostLikes(postId, likesCount-1)
-					likesCount = queries.GetLikes(postId)
-					context.JSON(http.StatusOK, gin.H{
-						"PostId":    postId,
-						"LikeCount": likesCount,
-					})
-
-				}
+			if likeStatus == "true" {
+				queries.UpdatePostLikes(postId, likesCount+1)
+				likesCount = queries.GetLikes(postId)
+				context.JSON(http.StatusOK, gin.H{
+					"PostId":    postId,
+					"LikeCount": likesCount,
+				})
 
 			} else {
-				context.JSON(http.StatusNotFound, gin.H{
-					"Error": "Provided post is not found",
+				queries.UpdatePostLikes(postId, likesCount-1)
+				likesCount = queries.GetLikes(postId)
+				context.JSON(http.StatusOK, gin.H{
+					"PostId":    postId,
+					"LikeCount": likesCount,
 				})
+
 			}
+
+			// } else {
+			// 	context.JSON(http.StatusNotFound, gin.H{
+			// 		"Error": "Provided post is not found",
+			// 	})
+			// }
 		} else {
 			context.JSON(http.StatusBadRequest, gin.H{
 				"Error": "Like status cannot be other than \"true\" or \"false\" ",
