@@ -2,6 +2,7 @@ package aws_utils
 
 import (
 	"bytes"
+	"fmt"
 	"log"
 
 	"github.com/Tej-11/connect-backend-application/env"
@@ -31,22 +32,45 @@ func S3UImagesUploader(images map[string][]byte, userId string, postId string) (
 
 	s3BucketService := s3.New(aws_session)
 
-	for imageId, decodedImage := range images {
+	if postId != "" {
 
-		s3BucketImagePath := "/" + userId + "/" + postId + "/" + imageId
+		for imageId, decodedImage := range images {
 
-		_, err = s3BucketService.PutObject(&s3.PutObjectInput{
-			Bucket: aws.String(bucketName),
-			Key:    aws.String(userId + "/" + postId + "/" + imageId),
-			Body:   bytes.NewReader(decodedImage),
-		})
+			s3BucketImagePath := "/" + userId + "/" + postId + "/" + imageId
 
-		if err != nil {
-			log.Fatal("Failed to upload data to S3", err)
-			return uploadedImagesURLs, err
+			_, err = s3BucketService.PutObject(&s3.PutObjectInput{
+				Bucket: aws.String(bucketName),
+				Key:    aws.String(userId + "/" + postId + "/" + imageId),
+				Body:   bytes.NewReader(decodedImage),
+			})
 
-		} else {
-			uploadedImagesURLs[imageId] = env.GetDotEnvVariable("S3BUCKET_URL") + s3BucketImagePath
+			if err != nil {
+				log.Fatal("Failed to upload data to S3", err)
+				return uploadedImagesURLs, err
+
+			} else {
+				uploadedImagesURLs[imageId] = env.GetDotEnvVariable("S3BUCKET_URL") + s3BucketImagePath
+			}
+		}
+	} else {
+		for imageId, decodedImage := range images {
+
+			s3BucketImagePath := "/" + userId
+
+			_, err = s3BucketService.PutObject(&s3.PutObjectInput{
+				Bucket: aws.String(bucketName),
+				Key:    aws.String(userId),
+				Body:   bytes.NewReader(decodedImage),
+			})
+
+			if err != nil {
+				log.Fatal("Failed to upload data to S3", err)
+				return uploadedImagesURLs, err
+
+			} else {
+				uploadedImagesURLs[userId] = env.GetDotEnvVariable("S3BUCKET_URL") + s3BucketImagePath
+				fmt.Println(" ", uploadedImagesURLs, "", imageId)
+			}
 		}
 	}
 
