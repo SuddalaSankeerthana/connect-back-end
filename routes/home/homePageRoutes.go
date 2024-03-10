@@ -14,6 +14,7 @@ func Routes(route *gin.Engine) {
 	home.GET("/get-posts", controllers.GetPosts)
 	home.GET("/get-users", controllers.GetUsers)
 	// home.GET("/get-posts", controllers.GetPosts)
+	home.POST("/post-comment", controllers.PostComment)
 	home.GET("/get-comments", controllers.GetComments)
 	home.POST("/update-like", controllers.UpdateLikeTable)
 	home.PATCH("/like", controllers.UpdateLikes)

@@ -45,13 +45,13 @@ func RawCommentParser(rawCommentsData []customTypes.RawCommentsType) map[string]
 			newReplay.Username = currentComment.Username
 			newReplay.CreatedAt = currentComment.CreatedAt
 
-			val, ok := comments[currentComment.PostId]
+			val, ok := comments[currentComment.ParentCommentId]
 
 			if ok {
 				val.Replays = append(val.Replays, newReplay)
+				comments[newReplay.ParentCommentId] = val
 			}
 
-			comments[newReplay.PostId] = val
 		}
 	}
 

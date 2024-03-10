@@ -4,6 +4,8 @@ go 1.22.0
 
 require gorm.io/driver/mysql v1.5.4
 
+require github.com/google/uuid v1.6.0 // indirect
+
 require (
 	github.com/aws/aws-sdk-go-v2 v1.25.2 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.1 // indirect

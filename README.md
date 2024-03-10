@@ -44,6 +44,16 @@ S3BUCKET_URL=your_s3_bucket_url
     "message": "Hello, world!"
 }`
 
+- POST `http://localhost:8080/homepage/post-comment`
+- For the above post route takes body as  `{
+    {
+    "PostId": ,
+    "UserId": ,
+    "ParentCommentId": ,
+    "CommentMessage": 
+}
+}` 
+
 ### > - While working with the /auth group change the functionality accordingly.
 
 # upload:
