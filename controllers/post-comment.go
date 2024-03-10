@@ -41,9 +41,9 @@ func PostComment(context *gin.Context) {
 			context.JSON(http.StatusNotFound, gin.H{"error": "Invalid user alert"})
 			return
 		}
-		if(newCommentData.ParentCommentId!="" && queries.IsCommentPresent(parentCommentId)){
+		if newCommentData.ParentCommentId != "" && !queries.IsCommentPresent(parentCommentId) {
 
-			context.JSON(http.StatusNotFound, gin.H{"error": "Please provide valid data 8"})
+			context.JSON(http.StatusNotFound, gin.H{"error": "Please provide valid data"})
 			return
 		}
 
